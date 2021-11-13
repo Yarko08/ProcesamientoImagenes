@@ -1,0 +1,16 @@
+C:\Users\yassi\source\repos\ProcesamientoImagenesAhoraSi\bin\Debug\ProcesamientoImagenesAhoraSi.exe.config
+C:\Users\yassi\source\repos\ProcesamientoImagenesAhoraSi\bin\Debug\ProcesamientoImagenesAhoraSi.exe
+C:\Users\yassi\source\repos\ProcesamientoImagenesAhoraSi\bin\Debug\ProcesamientoImagenesAhoraSi.pdb
+C:\Users\yassi\source\repos\ProcesamientoImagenesAhoraSi\bin\Debug\AForge.dll
+C:\Users\yassi\source\repos\ProcesamientoImagenesAhoraSi\bin\Debug\AForge.Video.DirectShow.dll
+C:\Users\yassi\source\repos\ProcesamientoImagenesAhoraSi\bin\Debug\AForge.Video.dll
+C:\Users\yassi\source\repos\ProcesamientoImagenesAhoraSi\bin\Debug\AForge.xml
+C:\Users\yassi\source\repos\ProcesamientoImagenesAhoraSi\bin\Debug\AForge.Video.xml
+C:\Users\yassi\source\repos\ProcesamientoImagenesAhoraSi\bin\Debug\AForge.Video.DirectShow.xml
+C:\Users\yassi\source\repos\ProcesamientoImagenesAhoraSi\obj\Debug\ProcesamientoImagenesAhoraSi.csproj.AssemblyReference.cache
+C:\Users\yassi\source\repos\ProcesamientoImagenesAhoraSi\obj\Debug\ProcesamientoImagenesAhoraSi.Form1.resources
+C:\Users\yassi\source\repos\ProcesamientoImagenesAhoraSi\obj\Debug\ProcesamientoImagenesAhoraSi.Properties.Resources.resources
+C:\Users\yassi\source\repos\ProcesamientoImagenesAhoraSi\obj\Debug\ProcesamientoImagenesAhoraSi.csproj.GenerateResource.cache
+C:\Users\yassi\source\repos\ProcesamientoImagenesAhoraSi\obj\Debug\ProcesamientoImagenesAhoraSi.csproj.CoreCompileInputs.cache
+C:\Users\yassi\source\repos\ProcesamientoImagenesAhoraSi\obj\Debug\ProcesamientoImagenesAhoraSi.exe
+C:\Users\yassi\source\repos\ProcesamientoImagenesAhoraSi\obj\Debug\ProcesamientoImagenesAhoraSi.pdb
