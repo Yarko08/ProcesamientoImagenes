@@ -48,7 +48,7 @@ namespace ProcesamientoImagenesAhoraSi
             webcam();
             int i = comboBox1.SelectedIndex;
             string NombreVideo = Misdispotiivos[i].MonikerString;
-            miwebcam = new VideoCaptureDevice(NombreVideo);
+            miwebcam = new VideoCaptureDevice(NombreVideo);//hjm,g
             miwebcam.NewFrame += new NewFrameEventHandler(Capturando);
             miwebcam.Start();
                 onof = true;
