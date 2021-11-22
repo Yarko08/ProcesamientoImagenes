@@ -25,6 +25,7 @@ namespace ProcesamientoImagenesAhoraSi
         private Bitmap resultante;
         private int[] histograma = new int[256];
         private int[,] conv3v3 = new int[3, 3];
+        private float[,] conv3v3f = new float[3, 3];
         private int[,] conv5v5 = new int[5, 5];
         private int factor=0;
         private int offset=0;
@@ -136,6 +137,54 @@ namespace ProcesamientoImagenesAhoraSi
                     if (sumaB < 0)
                         sumaB = 0;
                     resultante.SetPixel(x, y, Color.FromArgb(sumaR, sumaG, sumaB));
+                    test = resultante.GetPixel(x, y);
+                }
+        }
+        private void Convolucion3f()
+        {
+            int x = 0;
+            int y = 0;
+            int a = 0;
+            int b = 0;
+            Color oColor;
+            Color test;
+            float sumaR = 0;
+            float sumaG = 0;
+            float sumaB = 0;
+            for (x = 1; x < original.Width - 1; x++)
+                for (y = 1; y < original.Height - 1; y++)
+                {
+                    sumaR = 0;
+                    sumaG = 0;
+                    sumaB = 0;
+                    test = original.GetPixel(x, y);
+                    for (a = -1; a < 2; a++)
+                        for (b = -1; b < 2; b++)
+                        {
+                            oColor = original.GetPixel(x + a, y + b);
+
+                            sumaR = sumaR + (oColor.R * conv3v3f[a + 1, b + 1]);
+                            sumaG = sumaG + (oColor.G * conv3v3f[a + 1, b + 1]);
+                            sumaB = sumaB + (oColor.B * conv3v3f[a + 1, b + 1]);
+                        }
+
+                    sumaR = (sumaR / factor) + offset;
+                    sumaG = (sumaG / factor) + offset;
+                    sumaB = (sumaB / factor) + offset;
+
+                    if (sumaR > 255)
+                        sumaR = 255;
+                    if (sumaR < 0)
+                        sumaR = 0;
+                    if (sumaG > 255)
+                        sumaG = 255;
+                    if (sumaG < 0)
+                        sumaG = 0;
+                    if (sumaB > 255)
+                        sumaB = 255;
+                    if (sumaB < 0)
+                        sumaB = 0;
+                    resultante.SetPixel(x, y, Color.FromArgb((int)sumaR, (int)sumaG, (int)sumaB));
                     test = resultante.GetPixel(x, y);
                 }
         }
@@ -330,19 +379,45 @@ namespace ProcesamientoImagenesAhoraSi
                     Convolucion3();
                 }
 
-                if (Seleccion == "Detección de bordes")
+                if (Seleccion == "Direccional Arriba")
                 {
-                    conv5v5 = new int[,] {
-                      {2,4,5,4,1},
-                      {4,9,12,9,4},
-                      {5,12,15,12,5},
-                      {4,9,12,9,4},
-                      {2,4,5,4,2}
+
+                    conv3v3 = new int[,] {
+                      { 1, 1, 1},
+                      { 1, -2, 1},
+                      { -1, -1, -1}
                       };
-                    factor = 159;
+                    factor = 10;
                     offset = 0;
 
-                    Convolucion();
+                    Convolucion3();
+                }
+
+                if (Seleccion == "Sepia")
+                {
+
+                    conv3v3f = new float[,] {
+                      { (float)0.272,(float)0.534,(float).131},
+                      { (float)0.349,(float)0.686,(float).168},
+                      { (float)0.396,(float).769,(float).186}
+                      };
+                    factor = 2;
+                    offset = 0;
+
+                    Convolucion3f();
+                }
+
+                if (Seleccion == "Detección de bordes")
+                {
+                    conv3v3 = new int[,] {
+                      { 0, 1, 0},
+                      { 1, -4, 1},
+                      { 0, 1, 0}
+                      };
+                    factor = 1;
+                    offset = 0;
+
+                    Convolucion3();
                 }
 
                 original = resultante;
