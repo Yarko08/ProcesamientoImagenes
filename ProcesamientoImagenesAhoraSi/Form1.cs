@@ -316,6 +316,20 @@ namespace ProcesamientoImagenesAhoraSi
                     Convolucion3();
                 }
 
+                if (Seleccion == "Laplaciano")
+                {
+                    
+                    conv3v3 = new int[,] {
+                      { 1, 1, 1},
+                      { 1,-8, 1 },
+                      { 1, 1, 1 }
+                      };
+                    factor = 1;
+                    offset = 10;
+
+                    Convolucion3();
+                }
+
                 if (Seleccion == "Detección de bordes")
                 {
                     conv5v5 = new int[,] {
