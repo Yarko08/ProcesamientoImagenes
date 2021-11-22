@@ -42,6 +42,9 @@ namespace ProcesamientoImagenesAhoraSi
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.Cargando = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -54,6 +57,7 @@ namespace ProcesamientoImagenesAhoraSi
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // pictureBox2
             // 
@@ -81,6 +85,7 @@ namespace ProcesamientoImagenesAhoraSi
             this.Guardar.TabIndex = 3;
             this.Guardar.Text = "Guardar";
             this.Guardar.UseVisualStyleBackColor = true;
+            this.Guardar.Click += new System.EventHandler(this.Guardar_Click);
             // 
             // Salir
             // 
@@ -90,6 +95,7 @@ namespace ProcesamientoImagenesAhoraSi
             this.Salir.TabIndex = 4;
             this.Salir.Text = "Salir";
             this.Salir.UseVisualStyleBackColor = true;
+            this.Salir.Click += new System.EventHandler(this.Salir_Click);
             // 
             // Buscar
             // 
@@ -99,6 +105,7 @@ namespace ProcesamientoImagenesAhoraSi
             this.Buscar.TabIndex = 5;
             this.Buscar.Text = "Buscar...";
             this.Buscar.UseVisualStyleBackColor = true;
+            this.Buscar.Click += new System.EventHandler(this.Buscar_Click);
             // 
             // Camara
             // 
@@ -127,6 +134,7 @@ namespace ProcesamientoImagenesAhoraSi
             this.Aplicar.TabIndex = 8;
             this.Aplicar.Text = "Aplicar";
             this.Aplicar.UseVisualStyleBackColor = true;
+            this.Aplicar.Click += new System.EventHandler(this.Aplicar_Click);
             // 
             // listBox1
             // 
@@ -144,6 +152,7 @@ namespace ProcesamientoImagenesAhoraSi
             this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 10;
             this.label1.Text = "Buscar:";
+            this.label1.Visible = false;
             // 
             // textBox1
             // 
@@ -151,6 +160,7 @@ namespace ProcesamientoImagenesAhoraSi
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 11;
+            this.textBox1.Visible = false;
             // 
             // comboBox1
             // 
@@ -160,11 +170,32 @@ namespace ProcesamientoImagenesAhoraSi
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 12;
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "\"Imagenes PNG\"[*.png]|*.png";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "\"Imagenes PNG\"[*.png]|*.png";
+            this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
+            // 
+            // Cargando
+            // 
+            this.Cargando.AutoSize = true;
+            this.Cargando.Location = new System.Drawing.Point(132, 304);
+            this.Cargando.Name = "Cargando";
+            this.Cargando.Size = new System.Drawing.Size(65, 13);
+            this.Cargando.TabIndex = 13;
+            this.Cargando.Text = "Cargando....";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 334);
+            this.Controls.Add(this.Cargando);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
@@ -182,6 +213,7 @@ namespace ProcesamientoImagenesAhoraSi
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
@@ -204,6 +236,9 @@ namespace ProcesamientoImagenesAhoraSi
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Label Cargando;
     }
 }
 
