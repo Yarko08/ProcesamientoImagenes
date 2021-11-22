@@ -76,6 +76,7 @@ namespace ProcesamientoImagenesAhoraSi
             this.Deshacer.TabIndex = 2;
             this.Deshacer.Text = "Deshacer";
             this.Deshacer.UseVisualStyleBackColor = true;
+            this.Deshacer.Click += new System.EventHandler(this.Deshacer_Click);
             // 
             // Guardar
             // 
@@ -125,6 +126,7 @@ namespace ProcesamientoImagenesAhoraSi
             this.Tomar.TabIndex = 7;
             this.Tomar.Text = "Tomar";
             this.Tomar.UseVisualStyleBackColor = true;
+            this.Tomar.Click += new System.EventHandler(this.Tomar_Click);
             // 
             // Aplicar
             // 

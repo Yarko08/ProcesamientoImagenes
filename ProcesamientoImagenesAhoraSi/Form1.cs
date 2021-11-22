@@ -23,6 +23,7 @@ namespace ProcesamientoImagenesAhoraSi
         //Variables Destinadas a los filtros
         private Bitmap original;
         private Bitmap resultante;
+        private Bitmap porsi;
         private int[] histograma = new int[256];
         private int[,] conv3v3 = new int[3, 3];
         private float[,] conv3v3f = new float[3, 3];
@@ -194,11 +195,13 @@ namespace ProcesamientoImagenesAhoraSi
             CargarDispositivos();
 
             listBox1.Items.Add("Laplaciano");
-            listBox1.Items.Add("Sepia");
+            listBox1.Items.Add("Sobel");
             listBox1.Items.Add("Gausianno");
             listBox1.Items.Add("Direccional Arriba");
             listBox1.Items.Add("Detección de bordes");
             listBox1.Items.Add("Negativo");
+            listBox1.Items.Add("enfoque");
+        
             Cargando.Visible = false;
 
         }
@@ -274,6 +277,7 @@ namespace ProcesamientoImagenesAhoraSi
 
                 pictureBox1.Image = resultante;
                 original = (Bitmap)pictureBox1.Image;
+                porsi = original;
                 Tomo = true;
 
             }
@@ -393,18 +397,32 @@ namespace ProcesamientoImagenesAhoraSi
                     Convolucion3();
                 }
 
-                if (Seleccion == "Sepia")
+                if (Seleccion == "Sobel")
                 {
 
-                    conv3v3f = new float[,] {
-                      { (float)0.272,(float)0.534,(float).131},
-                      { (float)0.349,(float)0.686,(float).168},
-                      { (float)0.396,(float).769,(float).186}
+                    conv3v3 = new int[,] {
+                      { -1,0,1},
+                      { -2,0,2},
+                      { -1,0,1}
                       };
-                    factor = 2;
+                    factor = 1;
                     offset = 0;
 
-                    Convolucion3f();
+                    Convolucion3();
+                }
+
+                if (Seleccion == "enfoque")
+                {
+
+                    conv3v3 = new int[,] {
+                      { 0,-1,0},
+                      { -1,5,-1},
+                      { 0,-1,0}
+                      };
+                    factor = 1;
+                    offset = 0;
+
+                    Convolucion3();
                 }
 
                 if (Seleccion == "Detección de bordes")
@@ -425,6 +443,21 @@ namespace ProcesamientoImagenesAhoraSi
                 Aplicar.Enabled = true ;
                 pictureBox2.Image = resultante;
             }
+        }
+
+        private void Tomar_Click(object sender, EventArgs e)
+        {
+            webcam();
+            onof = false;
+            original = (Bitmap)pictureBox1.Image;
+            porsi = original;
+            Tomo = true;
+        }
+
+        private void Deshacer_Click(object sender, EventArgs e)
+        {
+            original = porsi;
+            pictureBox2.Image = original;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
