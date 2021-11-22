@@ -195,9 +195,10 @@ namespace ProcesamientoImagenesAhoraSi
             CargarDispositivos();
 
             listBox1.Items.Add("Laplaciano");
-            listBox1.Items.Add("Sobel");
+            listBox1.Items.Add("Sobel vertical");
+            listBox1.Items.Add("Sobel Horizontal");
             listBox1.Items.Add("Gausianno");
-            listBox1.Items.Add("Direccional Arriba");
+            listBox1.Items.Add("Nitidez");
             listBox1.Items.Add("Detección de bordes");
             listBox1.Items.Add("Negativo");
             listBox1.Items.Add("enfoque");
@@ -373,9 +374,9 @@ namespace ProcesamientoImagenesAhoraSi
                 {
                     
                     conv3v3 = new int[,] {
-                      { 1, 1, 1},
-                      { 1,-8, 1 },
-                      { 1, 1, 1 }
+                      { 0, -1, 0},
+                      { -1,5, -1 },
+                      { 0, -1, 0 }
                       };
                     factor = 1;
                     offset = 10;
@@ -383,21 +384,38 @@ namespace ProcesamientoImagenesAhoraSi
                     Convolucion3();
                 }
 
-                if (Seleccion == "Direccional Arriba")
+                if (Seleccion == "Nitidez")
                 {
 
+                    /* conv3v3f = new float[,] {
+                       { (float)0, (float)-.25, (float)0},
+                       { (float)-.25, (float)2, (float)-.25},
+                       { (float)0,(float)-.25, (float)0}
+                       };*/
                     conv3v3 = new int[,] {
-                      { 1, 1, 1},
-                      { 1, -2, 1},
+                      { -1, -1,-1},
+                      { -1, 9,-1},
                       { -1, -1, -1}
                       };
-                    factor = 10;
+                    factor = 1;
                     offset = 0;
 
                     Convolucion3();
                 }
+                     if (Seleccion == "Sobel Horizontal")
+                {
 
-                if (Seleccion == "Sobel")
+                    conv3v3 = new int[,] {
+                      { -1,-2,-1},
+                      { 0,0,0},
+                      { 1,02,1}
+                      };
+                    factor = 1;
+                    offset = 0;
+
+                    Convolucion3();
+                }
+                if (Seleccion == "Sobel vertical")
                 {
 
                     conv3v3 = new int[,] {
