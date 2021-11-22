@@ -45,6 +45,7 @@ namespace ProcesamientoImagenesAhoraSi
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.Cargando = new System.Windows.Forms.Label();
+            this.BtnHistograma = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -192,11 +193,23 @@ namespace ProcesamientoImagenesAhoraSi
             this.Cargando.TabIndex = 13;
             this.Cargando.Text = "Cargando....";
             // 
+            // BtnHistograma
+            // 
+            this.BtnHistograma.Location = new System.Drawing.Point(606, 20);
+            this.BtnHistograma.Name = "BtnHistograma";
+            this.BtnHistograma.Size = new System.Drawing.Size(61, 23);
+            this.BtnHistograma.TabIndex = 14;
+            this.BtnHistograma.Text = "Histograma";
+            this.BtnHistograma.UseVisualStyleBackColor = true;
+            this.BtnHistograma.Visible = false;
+            this.BtnHistograma.Click += new System.EventHandler(this.BtnHistograma_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 334);
+            this.Controls.Add(this.BtnHistograma);
             this.Controls.Add(this.Cargando);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.textBox1);
@@ -241,6 +254,7 @@ namespace ProcesamientoImagenesAhoraSi
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Label Cargando;
+        private System.Windows.Forms.Button BtnHistograma;
     }
 }
 

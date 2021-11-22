@@ -16,3 +16,5 @@ C:\Users\yassi\OneDrive\Documentos\GitHub\ProcesamientoImagenesAhoraSi\obj\Debug
 C:\Users\yassi\OneDrive\Documentos\GitHub\ProcesamientoImagenesAhoraSi\obj\Debug\ProcesamientoImagenesAhoraSi.csproj.CopyComplete
 C:\Users\yassi\OneDrive\Documentos\GitHub\ProcesamientoImagenesAhoraSi\obj\Debug\ProcesamientoImagenesAhoraSi.exe
 C:\Users\yassi\OneDrive\Documentos\GitHub\ProcesamientoImagenesAhoraSi\obj\Debug\ProcesamientoImagenesAhoraSi.pdb
+C:\Users\yassi\OneDrive\Documentos\GitHub\ProcesamientoImagenesAhoraSi\bin\Debug\Emgu.CV.Platform.NetStandard.dll
+C:\Users\yassi\OneDrive\Documentos\GitHub\ProcesamientoImagenesAhoraSi\bin\Debug\Emgu.CV.Platform.NetStandard.xml

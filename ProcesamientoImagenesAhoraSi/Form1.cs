@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AForge.Video.DirectShow;
 using AForge.Video;
-
+using Emgu.CV.Structure;
+using Emgu.CV;
 namespace ProcesamientoImagenesAhoraSi
 {
     public partial class Form1 : Form
@@ -19,20 +20,31 @@ namespace ProcesamientoImagenesAhoraSi
         private FilterInfoCollection Misdispotiivos;
         private VideoCaptureDevice miwebcam;
         private bool onof = false;
+       
+        
 
         //Variables Destinadas a los filtros
         private Bitmap original;
         private Bitmap resultante;
         private Bitmap porsi;
-        private int[] histograma = new int[256];
+       
         private int[,] conv3v3 = new int[3, 3];
         private float[,] conv3v3f = new float[3, 3];
         private int[,] conv5v5 = new int[5, 5];
+
         private int factor=0;
         private int offset=0;
         private int anchoVentana, altoVentana;
         private bool Tomo = false;
 
+
+        //Variables para el Histograma
+        private int[] histograma = new int[256];
+
+
+        //Variables para Deteccion de personas
+        //static readonly CascadeClassifier cascadeClassifier  = new CascadeClassifier("haarcascade_frontalface_alt_tree.xml");
+        //static readonly CascadeClassifier cascade2 = new CascadeClassifier("haarcascade_frontalface_alt_tree.xml");
         public Form1()
         {
             InitializeComponent();
@@ -55,6 +67,8 @@ namespace ProcesamientoImagenesAhoraSi
             int sumaR = 0;
             int sumaG = 0;
             int sumaB = 0;
+     
+            
             for (x = 3; x < original.Width - 3; x++)
                 for (y = 3; y < original.Height - 3; y++)
                 {
@@ -192,6 +206,7 @@ namespace ProcesamientoImagenesAhoraSi
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Camara.Enabled = false;
             CargarDispositivos();
 
             listBox1.Items.Add("Laplaciano");
@@ -204,6 +219,7 @@ namespace ProcesamientoImagenesAhoraSi
             listBox1.Items.Add("enfoque");
         
             Cargando.Visible = false;
+          
 
         }
 
@@ -213,6 +229,7 @@ namespace ProcesamientoImagenesAhoraSi
             if (Misdispotiivos.Count > 0)
             {
                 Haydispositivo = true;
+                Camara.Enabled = true;
                 for (int i = 0; i < Misdispotiivos.Count; i++)
                     comboBox1.Items.Add(Misdispotiivos[i].Name.ToString());
                 comboBox1.Text = Misdispotiivos[0].ToString();
@@ -223,26 +240,51 @@ namespace ProcesamientoImagenesAhoraSi
 
         private void Camara_Click(object sender, EventArgs e)
         {
-            if (onof == false) {
-                webcam();
-                int i = comboBox1.SelectedIndex;
-                string NombreVideo = Misdispotiivos[i].MonikerString;
-                miwebcam = new VideoCaptureDevice(NombreVideo);//hjm,g
-                miwebcam.NewFrame += new NewFrameEventHandler(Capturando);
-                miwebcam.Start();
-                onof = true;
-            }
-            else
+            if (comboBox1.SelectedIndex != -1)
             {
-                webcam();
-                onof = false;
+                if (onof == false)
+                {
+                    webcam();
+                    int i = comboBox1.SelectedIndex;
+                    string NombreVideo = Misdispotiivos[i].MonikerString;
+                    miwebcam = new VideoCaptureDevice(NombreVideo);//hjm,g
+                    miwebcam.NewFrame += new NewFrameEventHandler(Capturando);
+                    miwebcam.Start();
+                    onof = true;
+                }
+                else
+                {
+                    webcam();
+                    onof = false;
 
+                }
             }
         }
 
         private void Capturando(object sender, NewFrameEventArgs eventArgs)
         {
             Bitmap Imagen = (Bitmap)eventArgs.Frame.Clone();
+          /*  Bitmap Copia;
+            Copia = (Bitmap)Imagen.Clone();*/
+        /* 
+            Image<Bgr, byte> grayImage = new Image<Bgr, byte>(Imagen);
+
+           Rectangle[] rectangles = cascadeClassifier.DetectMultiScale(grayImage, 1.2, 1);
+            int cant = rectangles.Length;
+
+            for (int i = 0; i < cant; i++)
+            {
+
+                using (Graphics graphics = Graphics.FromImage(Imagen))
+                {
+
+                    using (Pen pen = new Pen(Color.Blue, 3))
+                    {
+                        graphics.DrawRectangle(pen, rectangles[i]);
+                    }
+                }
+            }
+            */
             pictureBox1.Image = Imagen;
         }
         private void webcam()
@@ -324,6 +366,7 @@ namespace ProcesamientoImagenesAhoraSi
 
         private void Aplicar_Click(object sender, EventArgs e)
         {
+           
             if (Tomo == true && listBox1.SelectedItem != null)
             {
                 int x = 0;
@@ -408,7 +451,7 @@ namespace ProcesamientoImagenesAhoraSi
                     conv3v3 = new int[,] {
                       { -1,-2,-1},
                       { 0,0,0},
-                      { 1,02,1}
+                      { 1,2,1}
                       };
                     factor = 1;
                     offset = 0;
@@ -476,6 +519,15 @@ namespace ProcesamientoImagenesAhoraSi
         {
             original = porsi;
             pictureBox2.Image = original;
+        }
+
+        private void BtnHistograma_Click(object sender, EventArgs e)
+        {
+            if(original != null)
+            {
+
+
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
