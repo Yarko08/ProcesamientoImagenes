@@ -201,7 +201,6 @@ namespace ProcesamientoImagenesAhoraSi
             this.BtnHistograma.TabIndex = 14;
             this.BtnHistograma.Text = "Histograma";
             this.BtnHistograma.UseVisualStyleBackColor = true;
-            this.BtnHistograma.Visible = false;
             this.BtnHistograma.Click += new System.EventHandler(this.BtnHistograma_Click);
             // 
             // Form1

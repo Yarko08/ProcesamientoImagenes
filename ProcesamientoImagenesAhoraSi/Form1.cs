@@ -40,6 +40,9 @@ namespace ProcesamientoImagenesAhoraSi
 
         //Variables para el Histograma
         private int[] histograma = new int[256];
+        private int[] histogramaR = new int[256];
+        private int[] histogramaG = new int[256];
+        private int[] histogramaB = new int[256];
 
 
         //Variables para Deteccion de personas
@@ -264,27 +267,7 @@ namespace ProcesamientoImagenesAhoraSi
         private void Capturando(object sender, NewFrameEventArgs eventArgs)
         {
             Bitmap Imagen = (Bitmap)eventArgs.Frame.Clone();
-          /*  Bitmap Copia;
-            Copia = (Bitmap)Imagen.Clone();*/
-        /* 
-            Image<Bgr, byte> grayImage = new Image<Bgr, byte>(Imagen);
-
-           Rectangle[] rectangles = cascadeClassifier.DetectMultiScale(grayImage, 1.2, 1);
-            int cant = rectangles.Length;
-
-            for (int i = 0; i < cant; i++)
-            {
-
-                using (Graphics graphics = Graphics.FromImage(Imagen))
-                {
-
-                    using (Pen pen = new Pen(Color.Blue, 3))
-                    {
-                        graphics.DrawRectangle(pen, rectangles[i]);
-                    }
-                }
-            }
-            */
+        
             pictureBox1.Image = Imagen;
         }
         private void webcam()
@@ -525,7 +508,81 @@ namespace ProcesamientoImagenesAhoraSi
         {
             if(original != null)
             {
+                int x = 0;
+                int y = 0;
 
+                Color rColor = new Color();
+                Color gColor = new Color();
+                Color bColor = new Color();
+
+                //Histograma para valores ROJOS
+                for (x = 0; x < original.Width; x++)
+                {
+                    for (y = 0; y < original.Height; y++)
+                    {
+                        rColor = ((Bitmap)pictureBox2.Image).GetPixel(x, y);
+
+                        histograma[rColor.R]++;
+                    }
+                }
+
+                for (x = 0; x < original.Width; x++)
+                {
+                    for (y = 0; y < original.Height; y++)
+                    {
+                        gColor = ((Bitmap)pictureBox2.Image).GetPixel(x, y);
+
+                        histogramaG[gColor.G]++;
+                    }
+                }
+
+                for (x = 0; x < original.Width; x++)
+                {
+                    for (y = 0; y < original.Height; y++)
+                    {
+                        bColor = ((Bitmap)pictureBox2.Image).GetPixel(x, y);
+
+                        histogramaB[bColor.B]++;
+                    }
+                }
+
+
+                //Suavizado del histograma
+                int[] hs = new int[256];
+                int[] hG = new int[256];
+                int[] hB = new int[256];
+
+                int n = 0;
+
+                hs[0] = (histograma[0] + histograma[1]) / 2;
+                hs[255] = (histograma[255] + histograma[254]) / 2;
+
+                hG[0] = (histogramaG[0] + histogramaG[1]) / 2;
+                hG[255] = (histogramaG[255] + histogramaG[254]) / 2;
+
+                hB[0] = (histogramaB[0] + histogramaB[1]) / 2;
+                hB[255] = (histogramaB[255] + histogramaB[254]) / 2;
+
+                for (n = 1; n < 254; n++)
+                {
+
+                    hs[n] = (histograma[n - 1] + histograma[n] + histograma[n + 1]) / 3;
+                    hG[n] = (histogramaG[n - 1] + histogramaG[n] + histogramaG[n + 1]) / 3;
+                    hB[n] = (histogramaB[n - 1] + histogramaB[n] + histogramaB[n + 1]) / 3;
+
+                }
+
+                Form2 hsform = new Form2(hs);
+                Form2 hGform = new Form2(hG);
+                Form2 hBform = new Form2(hB);
+
+                hsform.Text = "RED";
+                hGform.Text = "GREEN";
+                hBform.Text = "BLUE";
+
+                hsform.Show();
+                hGform.Show();
+                hBform.Show();
 
             }
         }
